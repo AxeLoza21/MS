@@ -1,0 +1,30 @@
+---
+interface Props {
+	subTitle: string;
+    color?: 'white' | 'black';
+}
+
+const { subTitle, color = 'black' } = Astro.props;
+---
+
+<header>
+    <h2 class={"sub-title " + color}>{subTitle}</h2>
+</header>
+
+<style>
+    .sub-title {
+      margin-left: 4rem;
+      margin-right: 4rem;
+      border-bottom: 4px solid #CA8C35;
+      padding-bottom: 10px;
+      display: inline;
+    }
+  
+    .sub-title.white {
+      color: white;
+    }
+  
+    .sub-title.black {
+      color: black;
+    }
+  </style>

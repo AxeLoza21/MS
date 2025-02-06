@@ -1,0 +1,77 @@
+---
+// Datos generados en el servidor
+
+---
+<div class="slider">
+  <div class="slider-track">
+    <!-- Original -->
+    <img src="/ej1.jpeg" alt="Imagen 1" class="slider-image" />
+    <img src="/ej2.jpeg" alt="Imagen 2" class="slider-image" />
+    <img src="/ej3.jpeg" alt="Imagen 3" class="slider-image" />
+    <!-- Duplicadas -->
+    <img src="/ej1.jpeg" alt="Imagen 1 Duplicada" class="slider-image" />
+    <img src="/ej2.jpeg" alt="Imagen 2 Duplicada" class="slider-image" />
+    <img src="/ej3.jpeg" alt="Imagen 3 Duplicada" class="slider-image" />
+  </div>
+</div>
+
+<style>
+  .slider { 
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    margin: 2rem auto;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-image: repeating-linear-gradient(15deg, #D5DBDB 0, #D5DBDB 10px, transparent 10px, transparent 20px);
+    border-image-slice: 1;
+    padding-top: 2rem;
+    padding-bottom: 2rem
+  }
+
+  .slider-track {
+    width: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .slider-image {
+    width: 100%;
+    max-width: 359px;
+    height: 416px;
+    margin: 0 15px;
+    transform: rotate(-5deg);
+    box-shadow: 10px 10px #A8A8A8;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+  }
+
+  .slider-image:hover {
+    transform: scale(1.05) rotate(0deg);
+  }
+</style>
+
+<script>
+  const track = document.querySelector('.slider-track');
+  const images = document.querySelectorAll('.slider-image');
+  const imageWidth = images[0].clientWidth + 30; // Ancho de la imagen + margen
+  let currentIndex = 0;
+
+  function slide() {
+    currentIndex++;
+    track.style.transition = "transform 0.5s ease"; // Animación
+    track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+
+    // Si llegamos al final de las imágenes originales, reinicia sin animación
+    if (currentIndex === images.length / 2) {
+      setTimeout(() => {
+        track.style.transition = "none"; // Elimina la animación
+        currentIndex = 0; // Reinicia al inicio del slider
+        track.style.transform = `translateX(0px)`; // Vuelve al principio
+      }, 500); // Espera a que termine la animación
+    }
+  }
+
+  // Mueve las imágenes automáticamente cada 3 segundos
+  setInterval(slide, 3000);
+</script>
